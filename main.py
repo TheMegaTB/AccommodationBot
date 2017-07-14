@@ -4,7 +4,7 @@ from conf import configuration
 from crawler import crawl, parse
 from cache import load, save
 import mail
-import pdf
+import parser
 
 
 def md5(string):
@@ -18,11 +18,35 @@ def check_page():
     page_hash = md5(page)
     c = load()
     if not c['hash'] == page_hash:
-        print("HASH CHANGED!")
-        print(page_hash)
-        # TODO Sent mail or whatever
+        print("HASH CHANGED! (" + page_hash + ")")
+
+        # Check if the file is online and we didn't sent the mail already (if so send it)
         match = parse(page.decode('utf8'))
-        print(match)
+        if match is not None and not c['mailSent']:
+            print("FILE IS ONLINE! Sending mails ... (and we didn't sent them already)")
+            docx = crawl(match)
+            for person_details in configuration['details']:
+                variables = {
+                    "name": person_details['name'],
+                    "year": person_details['targetYear'],
+                    "quarter": person_details['quarter'],
+                    "mail": person_details['mail']
+                }
+                res = parser.update_document_contents(docx, person_details)
+                res_filename = "Antrag Wohnheimzimmer " + variables['quarter'] + " " + variables['year'] + ".docx"
+                mail.send(configuration['mail'], variables, res, res_filename)
+            c['mailSent'] = True
+
+        # Send a mail regardless of the above that there is a change
+        notification_conf = {
+            "body": "Something changed! Go and visit " + configuration['targetURL'],
+            "subject": "IMPORTANT | The watched website has changed! Go check it immediately!",
+            "recipient": configuration['mail']['notificationRecipient'],
+            "server": configuration['mail']['server']
+        }
+        if c['mailSent']:
+            notification_conf['body'] += "\n\n Oh and btw I already sent your reservation request ;)\n\n Have a good one!\n - AccommodationBot"
+        mail.send(notification_conf)
 
         c['hash'] = page_hash
     else:
@@ -31,4 +55,3 @@ def check_page():
     save(c)
 
 check_page()
-# mail.send(configuration['mail'])

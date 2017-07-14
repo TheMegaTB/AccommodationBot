@@ -8,11 +8,6 @@ def crawl(target):
 
 
 def parse(string):
-    print(type(string))
-    print(string)
-    match = re.match(".*\"([^\"]*docx)\"", string)
-    # match = re.match(r'\"([^\"]*docx)\"', string)
-    print(match)
-    print(type(match))
-    group = match.group(1)
-    return group
+    matches = [a for a in [re.match(".*\"([^\"]*Antrag[^\"]*docx)\"", line) for line in string.split("\n")] if a is not None]
+    for match in matches:
+        return match.group(1)
