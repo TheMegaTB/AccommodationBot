@@ -13,6 +13,20 @@ def md5(string):
     return m.hexdigest()
 
 
+def send_smtp_test():
+    c = load()
+    if not c['smtpTestSent']:
+        c['smtpTestSent'] = True
+        save(c)
+        notification_conf = {
+            "body": "This is a test of your smtp settings.\nYour final mail will be sent to " + ", ".join(configuration["mail"]["recipient"]) + ".\n\n- Accommodation Bot",
+            "subject": "SMTP Settings Test!",
+            "recipient": configuration['mail']['notificationRecipient'],
+            "server": configuration['mail']['server']
+        }
+        mail.send(notification_conf)
+
+
 def check_page():
     page = crawl(configuration['targetURL'])  # .decode("utf8")
     page_hash = md5(page)
@@ -54,4 +68,6 @@ def check_page():
 
     save(c)
 
+
+send_smtp_test()
 check_page()
