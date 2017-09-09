@@ -72,9 +72,10 @@ def update_document_contents(document, details):
                 if match is not None:
                     l[j].text = l[j].text.replace(match.group(0), match.group(0) + " " + mappings[mapping])
 
-            # Select the prices we want
-            if i in paragraphs_to_highlight:
-                l[j].text = l[j].text + " <========="
+        # Select the prices we want
+        if i in paragraphs_to_highlight:
+            print("Added to ", )
+            l[j].text = l[j].text + " <========="
 
     doc.add_paragraph(details['name'])
     doc.add_paragraph(details['footnote'])
