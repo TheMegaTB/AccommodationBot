@@ -4,18 +4,19 @@ configuration = {
         "file": "/tmp/accommodationBot",
         "defaults": {
             "hash": "nothing!",
-            "mailSent": False
+            "mailSent": False,
+            "smtpTestSent": False
         }
     },
     "details": [
         {
-            "quarter": "Q1",
+            "quarter": "Q2",
             "targetYear": "2018",
             "location": "Musterstadt",
             "streetAndCity": "Musterstraße 9, 21502 Musterstadt",
             "name": "Max Mustermann",
             "phone": "00987654321",
-            "mail": "max@mustermann.de",
+            "mail": "<Your Mail>",
             "matrikelnr": "1234567890",
             "footnote": "Sofern möglich würde ich ein Zimmer im E-Gebäude bevorzugen."
         }
@@ -24,12 +25,12 @@ configuration = {
         "recipient": [],  # TODO Insert actual target mail
         "notificationRecipient": ["til.blechschmidt@gmail.com", "noah.peeters@icloud.com"],
         "subject": "Antrag auf ein Wohnheimzimmer %quarter% %year%",
-        "body": "Hallo Frau Conrad,\nim Anhang finden Sie meinen Antrag auf ein Zimmer in dem Wohnheim der Nordakademie.\n\n- %name%",
+        "body": "Hallo Frau Conrad,\nim Anhang finden Sie meinen Antrag für ein Zimmer in dem Wohnheim der Nordakademie.\n\nFür den Fall, dass Sie den Anhang nicht öffnen können, habe ich Ihnen hier meine Daten noch einmal zusammengefasst:\n\nName: %name%\nAdresse: %streetAndCity%\nMail: %mail%\nTelefone: %phone%\nMatrikelnummber: %matrikelnr%\nIch würde ein Zimmer der höhren Preisklasse im E-Gebäude bevorzugen.\n\n\n- %name%",
         "server": {
             "hostname": "smtp.gmail.com",
             "port": 587,
-            "username": "someMailUser",
-            "password": "somePassword"
+            "username": "<Your User Name>",
+            "password": "<Your password>"
         }
     }
 }

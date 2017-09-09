@@ -44,7 +44,10 @@ def check_page():
                     "name": person_details['name'],
                     "year": person_details['targetYear'],
                     "quarter": person_details['quarter'],
-                    "mail": person_details['mail']
+                    "mail": person_details['mail'],
+                    "streetAndCity": person_details['streetAndCity'],
+                    "phone": person_details['phone'],
+                    "matrikelnr": person_details['matrikelnr']
                 }
                 res = parser.update_document_contents(docx, person_details)
                 res_filename = "Antrag Wohnheimzimmer " + variables['quarter'] + " " + variables['year'] + ".docx"
