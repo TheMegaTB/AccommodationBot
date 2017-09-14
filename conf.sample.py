@@ -25,7 +25,7 @@ configuration = {
         "recipient": [],  # TODO Insert actual target mail
         "notificationRecipient": ["til.blechschmidt@gmail.com", "noah.peeters@icloud.com"],
         "subject": "Antrag auf ein Wohnheimzimmer %quarter% %year%",
-        "body": "Hallo Frau Conrad,\nim Anhang finden Sie meinen Antrag für ein Zimmer in dem Wohnheim der Nordakademie.\n\nFür den Fall, dass Sie den Anhang nicht öffnen können, habe ich Ihnen hier meine Daten noch einmal zusammengefasst:\n\nName: %name%\nAdresse: %streetAndCity%\nMail: %mail%\nTelefone: %phone%\nMatrikelnummber: %matrikelnr%\nIch würde ein Zimmer der höhren Preisklasse im E-Gebäude bevorzugen.\n\n\n- %name%",
+        "body": "Hallo Frau Conrad,\nim Anhang finden Sie meinen Antrag für ein Zimmer in dem Wohnheim der Nordakademie.\n\nFür den Fall, dass Sie den Anhang nicht öffnen können, habe ich Ihnen hier meine Daten noch einmal zusammengefasst:\n\nName: %name%\nAdresse: %streetAndCity%\nMail: %mail%\nTelefone: %phone%\nMatrikelnummber: %matrikelnr%\nIch würde ein Zimmer der höheren Preisklasse im E-Gebäude bevorzugen.\n\n\n- %name%",
         "server": {
             "hostname": "smtp.gmail.com",
             "port": 587,
