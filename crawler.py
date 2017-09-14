@@ -3,7 +3,9 @@ import re
 
 
 def crawl(target):
-    page = urllib.request.urlopen(target).read()
+    req = urllib.request.urlopen(target)
+    print("Return code:", req.getcode())
+    page = req.read()
     return page
 
 
