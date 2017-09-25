@@ -1,5 +1,5 @@
 import hashlib
-
+from _thread import start_new_thread
 from conf import configuration
 from crawler import crawl, parse
 from cache import load, save
@@ -33,6 +33,9 @@ def check_page():
     c = load()
     if not c['hash'] == page_hash:
         print("HASH CHANGED! (" + page_hash + ")")
+
+        # Run a background thread to archive the page in the web archive
+        start_new_thread(crawl, ("https://web.archive.org/save/" + configuration['targetURL'], False))
 
         # Check if the file is online and we didn't sent the mail already (if so send it)
         match = parse(page.decode('utf8'))

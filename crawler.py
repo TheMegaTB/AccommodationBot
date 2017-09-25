@@ -2,9 +2,11 @@ import urllib.request
 import re
 
 
-def crawl(target):
+def crawl(target, log=True):
     req = urllib.request.urlopen(target)
-    print("Return code:", req.getcode())
+    print("Crawled ", target)
+    if log:
+        print("Return code:", req.getcode())
     page = req.read()
     return page
 
